@@ -1,0 +1,108 @@
+div, ul, li{
+    font-family: "Calibri light", sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+}
+
+.form{
+    width: 100%;
+}
+
+.dropdown{
+    width: 100%;
+    font-family: "Calibri light", sans-serif;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 15px;
+}
+
+.dropdown > li{
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #B4B4B4;
+    padding-bottom: 15px;
+    gap: 10px;
+}
+
+.dropdown > li:last-child{
+    margin-bottom: 0;
+}
+
+.dropdown > li > input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-family: "Calibri light", sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    color: #4B6DE3CC;
+    text-align: end;
+}
+
+.form > a {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+    font-size: 14px;
+    font-family: "Calibri light", sans-serif;
+    font-weight: 300;
+    color: #333333CC;
+}
+
+.settings {
+    margin-top: 50px;
+}
+
+.settings > button{
+    width: 100%;
+    padding: 20px 15px;
+    text-align: start;
+    background-color: #fff;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    font-family: "Calibri light", sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+    cursor: pointer;
+    position: relative;
+}
+
+.settings > button::after{
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 15px;
+    top: 25px;
+    right: 10px;
+    background: url('./../../../assets/images/common__images/arrow_blue.svg') no-repeat;
+}
+
+.signOut__wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.signOut__wrapper > button{
+    height: 44px;
+    background: #4B6DE3;
+    font-family: "Calibri", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #FFFFFF;
+    padding: 0 60px;
+    border: none;
+    outline: none;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 375px) {
+    .dropdown span{
+        font-size: 5vw;
+    }
+}

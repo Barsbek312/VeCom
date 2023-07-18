@@ -1,0 +1,43 @@
+.option {
+    padding: 15px 10px;
+    cursor: pointer;
+}
+/* 
+.option:hover {
+    background-color: #4B6DE3;
+    color: #ffffff;
+} */
+
+.option_no{
+    color: #000;
+}
+
+.arrow_back{
+    display: flex;
+    justify-content: space-between;
+}
+
+.arrow_back > div{
+    width: 7px;
+    height: 18px;
+}
+
+.arrow_back img{
+    width: 100%;
+    height: 100%;
+    transform: rotate(180deg);
+}
+
+@media (hover: hover) {
+    .option:hover {
+        background-color: #4B6DE3;
+        color: #ffffff;
+    }
+}
+
+@media (hover: none) {
+    .option:active{
+        background-color: #4B6DE3;
+        color: #ffffff;
+    }
+}

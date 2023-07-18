@@ -1,0 +1,43 @@
+.wrapper{
+    margin-top: 20px;
+}
+
+.name__input{
+    position: relative;
+}
+
+.name__input::before{
+    content: "";
+    position: absolute;
+    z-index: 2;
+    left: 15px;
+    top: 15px;
+    width: 20px;
+    height: 20px;
+    background: url('./../../../../assets/images/entrance__icons/name.svg') no-repeat;
+}
+
+.mobile{
+    position: relative;
+}
+
+.mobile::before{
+    content: "";
+    position: absolute;
+    z-index: 2;
+    left: 15px;
+    top: 16px;
+    width: 20px;
+    height: 20px;
+    background: url('./../../../../assets/images/entrance__icons/mobile.svg') no-repeat;
+}
+
+.select__wrapper{
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+.birthday__wrapper{
+    height: 50px;
+    margin-bottom: 10px;
+}

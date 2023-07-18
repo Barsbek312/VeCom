@@ -1,0 +1,32 @@
+.footer{
+    width: 100%;
+    background-color: #fff;
+    flex: 0 0 auto;
+}
+
+.footer > div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.footer__left > div{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #D9D9D9;
+}
+
+.footer__list{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer__list a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

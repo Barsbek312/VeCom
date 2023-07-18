@@ -1,0 +1,26 @@
+.entrance_input{
+    position: relative;
+    width: 100%;
+    border: 1px solid transparent;
+    outline: none;
+    height: 50px;
+    border-radius: 35px;
+    padding-left: 40px;
+    margin-bottom: 10px;
+    color: rgba(51, 51, 51, 0.9);
+    font-size: 16px;
+    font-family: "Calibri light", sans-serif;
+    font-weight: 300;
+    padding-right: 15px;
+}
+
+input.entrance_input::placeholder{
+    color: rgba(51, 51, 51, 0.9);
+    font-size: 16px;
+    font-family: "Calibri light", sans-serif;
+    font-weight: 300;
+}
+
+input.entrance_input:focus{
+    border: 1px solid #4B6DE3;
+}

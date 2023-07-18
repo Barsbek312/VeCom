@@ -1,0 +1,98 @@
+.wrapper{
+    margin-top: 10px;
+}
+
+.wrapper > form > *{
+    width: 100%;
+    margin-top: 30px;
+}
+
+
+.images{
+    display: flex;
+    gap: 10px;
+}
+
+.chooseImage__wrapper{
+    aspect-ratio: 1/1;
+    width: 30%;
+    align-self: flex-start;
+    background: #C9C9C933;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.chooseImage__input{
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+}
+
+.chooseImage__wrapper label{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.image__wrapper{
+    width: 20px;
+    height: 20px;
+}
+
+.image__wrapper > img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.choosed__image{
+    background-size: cover;
+    background-position: center center;
+}
+
+.wrapper h3{
+    font-family: "Calibri", sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.wrapper textarea {
+    resize: none;
+}
+
+.wrapper .input{
+    width: 100%;
+    border-radius: 15px;
+    height: 63px;
+    padding: 10px;
+    margin-top: 20px;
+    font-family: "Calibri light", sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    border: 1px solid #333333;
+}
+
+.description{
+    height: 85px !important;
+}
+
+.submit {
+    padding: 10px 0;
+    border-radius: 62px;
+    border: none;
+    outline: none;
+    background-color: #4B6DE3;
+    color: #fff;
+    font-family: "Calibri light", sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    cursor: pointer;
+}

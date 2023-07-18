@@ -1,0 +1,12 @@
+.slick-dots{
+    margin-bottom: 30px;
+}
+
+.slick-dots > .slick-active > div{
+    background: #4B6DE3;
+}
+
+.slick-arrow{
+    display: none !important;
+}
+

@@ -1,0 +1,96 @@
+.wrapper{
+    width: 100%;
+}
+
+.comeIn{
+    margin-top: 40px;
+}
+
+.comeIn > button{
+    width: 100%;
+    height: 50px;
+    border-radius: 62px;
+    background: #4B6DE3;
+    color: #fff;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    font-family: "Calibri light", sans-serif;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+.or{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.or > div{
+    height: 1px;
+    background: #333333;
+    flex: 1 1 0;
+}
+
+.or > span{
+    font-size: 12px;
+    font-family: "Calibri", sans-serif;
+    font-weight: 400;
+    padding: 0 15px;
+}
+
+.alternatives{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.alternatives > a{
+    flex: 1 1 0;
+}
+
+.alternatives > a > button{
+    background: #fff;
+    border-radius: 35px;
+    height: 39px;
+    width: 100%;
+    border: none;
+    outline: none;
+    font-family: "Calibri", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    position: relative;
+    cursor: pointer;
+}
+
+.google{
+    padding-left: 25px;
+    color: #000000;
+}
+
+.google::before{
+    content: '';
+    position: absolute;
+    left: 33px;
+    top: 10px;
+    width: 20px;
+    height: 20px;
+    background: url("./../../../assets/images/entrance__icons/google.svg") no-repeat;
+}
+
+.apple{
+    padding-left: 15px;
+    color: #000000;
+}
+
+.apple::before{
+    content: '';
+    position: absolute;
+    left: 33px;
+    top: 9px;
+    width: 20px;
+    height: 20px;
+    background: url("./../../../assets/images/entrance__icons/apple.svg") no-repeat;
+}

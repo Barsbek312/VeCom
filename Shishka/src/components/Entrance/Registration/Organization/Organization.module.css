@@ -1,0 +1,18 @@
+.wrapper{
+    margin-top: 20px;
+}
+
+.organization_input{
+    position: relative;
+}
+
+.organization_input::before{
+    content: '';
+    position: absolute;
+    z-index: 2;
+    left: 13px;
+    top: 15px;
+    width: 23px;
+    height: 23px;
+    background: url('./../../../../assets/images/entrance__icons/organization.svg') no-repeat;
+}

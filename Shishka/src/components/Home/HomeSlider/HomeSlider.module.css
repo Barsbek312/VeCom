@@ -1,0 +1,35 @@
+.subscriptions {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    justify-content: space-between;
+}
+
+.subscriptions::-webkit-scrollbar{
+    display: none;
+}
+
+.subscriptions > li {
+    max-width: 300px;
+    height: 35px;
+    background: #4B6DE3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7px;
+    color: #fff;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    margin-top: 20px;
+    padding: 5px;
+    padding-left: 17px;
+    padding-right: 17px;
+    flex: 1 0 0;
+}
+
+.subscriptions > li > a{
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

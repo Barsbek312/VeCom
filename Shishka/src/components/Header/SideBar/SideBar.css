@@ -1,0 +1,171 @@
+/* Position and sizing of burger button */
+.bm-burger-button {
+    position: absolute;
+    width: 27px;
+    height: 10px;
+    top: 20px;
+    transition: top 0.5s ease-in-out;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+    background: #333333;
+    border-radius: 20px;
+}
+
+.bm-burger-bars:first-child{
+    margin-top: -6px;
+}
+
+.bm-burger-bars:last-child{
+    margin-top: 6px;
+}
+
+/* Color/shape of burger icon bars on hover*/
+.bm-burger-bars-hover {
+    background: #333333;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+    display: none;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+    background: #bdc3c7;
+}
+
+#react-burger-menu-btn{
+    top: -7px !important;
+    height: 25px !important;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/*
+  Sidebar wrapper styles
+  Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+  */
+.bm-menu-wrap {
+    position: fixed;
+    height: 110% !important;
+    left: 0;
+    top: 0;
+}
+
+/* General sidebar styles */
+.bm-menu {
+    background: #F6F6F6;
+    padding-top: 49px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 167px;
+    font-size: 1.15em;
+    position: relative;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+    fill: #373a47;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+    color: #b8b7ad;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Individual item */
+.bm-item {
+    display: inline-block;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.25);
+}
+
+/* Individual item */
+.bm-item {
+    display: inline-block;
+    color: #d1d1d1;
+    margin-bottom: 10px;
+    text-align: left;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.wrapper{
+    min-width: 30px;
+}
+
+.sidebar__header{
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.sidebar__ava{
+    width: 34px !important;
+    height: 34px;
+    background: #D9D9D9;
+    border-radius: 50%;
+}
+
+.sidebar__ava > img{
+    width: 100%;
+    height: 100%;
+    
+}
+
+.sidebar__header > h2{
+    font-size: 20px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+}
+
+.sidebar__header > h2 > a{
+    color: #333333 !important;
+    text-decoration: none;
+}
+
+.menu-item{
+    width: 149px;
+    font-size: 18px;
+    font-family: 'Calibri light', sans-serif;
+    font-weight: 300;
+    color: #fff;
+    background-color: #fff;
+    color: #000;
+    height: 39px;
+    margin-bottom: 5px;
+    border-radius: 13px;
+    display: flex !important;
+    align-items: center;
+    padding-left: 10px;
+    cursor: pointer;
+}
+
+.menu-item.active{
+    background: #4B6DE3;
+    color: #fff;
+}
+
+.advertising{
+    display: flex;
+    width: 100%;
+    flex: 1 1 0;
+    background: #fff;
+    text-align: center;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.qr_code{
+    margin-bottom: 110px;
+}
