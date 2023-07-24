@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import Entrance from "./Entrance";
 import { connect, useSelector } from "react-redux";
 import { register, login } from "../../redux/user.js";
@@ -8,48 +8,52 @@ import { Navigate } from "react-router-dom";
 const EntranceContainer = (props) => {
 
     const dispatch = useDispatch();
-    const { registered, loading, user } = useSelector(state => state.user);
+    const { registered, loading, isAuth } = useSelector(state => state.user);
 
     const [isError, setIsError] = useState(false);
+    const [isExist, setIsExist] = useState(false);
+    const [isRegistration, setIsRegistration] = useState(false);
 
-    const onSubmitButton = (data, event) => {
+    const onSubmitButton = async (data, event) => {
         event.preventDefault();
         const dataLength = Object.keys(data).length;
-        if(dataLength <= 3) {
+        if(!isRegistration) {
             const setError = dataLength > 2 ? false : true;
             setIsError(setError);
             if(!isError) {
-                data.status = data.status?.replace(/\s/g, '');
-                if(data.status === "Волонтер") {
+                data.status = data?.status?.trim();
+                data.username = data?.email;
+                if(data?.status === "Волонтер") {
                     delete data.status;
-                    data.username = data.email;
                     delete data.email;
-                    dispatch(login(data));
+                    dispatch(login(data, true));
+                } else{
+                    delete data.status;
+                    delete data.email;
+                    dispatch(login(data, false));
                 }
             }
         } 
         else {
-            delete data.confirmPassword;
-            data["hours"] = 0;
-            data['certificated'] = false;
+            delete data?.confirmPassword;
             data['username'] = data['email'];
-            dispatch(register(data));
-            console.log(data);
+            let isVol = false;
+            if(dataLength > 4) {
+                data["hours"] = 0;
+                data['certificated'] = false;
+                isVol = true;
+            }
+            data.isVol = isVol;
+            const res = await dispatch(register(data));
+
+            if(res?.payload?.username[0] === "A user with that username already exists.") {
+                setIsExist(true);
+            }
         }
     }
 
-    useEffect(() => {
-        console.log(isError)
-    }, [isError])
-
-
-    // if(registered) { 
-    //     return <Navigate to="/" />
-    // }
-
-
     if(registered) return <Navigate to="/messageVerify" />
-    if(user) return <Navigate to="/" />
+    if(isAuth) return <Navigate to="/" />
 
 
 
@@ -57,7 +61,10 @@ const EntranceContainer = (props) => {
         <Entrance onSubmitButton={onSubmitButton} 
             isLoading={loading}
             isError={isError}
-            setIsError={setIsError}/>
+            setIsError={setIsError}
+            isExist={isExist}
+            isRegistration={isRegistration}
+            setIsRegistration={setIsRegistration}/>
     )
 
 }

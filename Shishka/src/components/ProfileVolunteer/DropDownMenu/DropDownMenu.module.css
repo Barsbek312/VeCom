@@ -26,6 +26,10 @@ div, ul, li{
     gap: 10px;
 }
 
+.dropdown > li > span{
+    white-space: nowrap;
+}
+
 .dropdown > li:last-child{
     margin-bottom: 0;
 }

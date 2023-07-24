@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import v from './Verify.module.css';
 import { Navigate, useParams } from "react-router-dom";
-import { verify } from "../../../redux/user";
+import { activate } from "../../../redux/user";
 import { useDispatch, useSelector } from "react-redux";
 
 const Verify = () => {
@@ -18,7 +18,7 @@ const Verify = () => {
         const token = params.token;
 
 
-        dispatch(verify({uid, token}));
+        dispatch(activate({uid, token}));
     }
 
     if(activated) return <Navigate to="/" />
@@ -34,13 +34,13 @@ const Verify = () => {
                         Подтвердите, что это Ваша почта
                     </p>
                     <button onClick={handleOnClick} className={v.modal__button}>Подтвердить</button>
-                    <button
+                    {/* <button
                         className={v.modal__exit}
                         type="button"
-                        onClick={() => {setIsHandleClick(true)}}
+                        onClick={() => {setIsHandleClick(true); console.log(isHandleClick)}}
                     >
                         Изменить адрес электронной почты
-                    </button>
+                    </button> */}
                 </div>
             </div>
         </main>

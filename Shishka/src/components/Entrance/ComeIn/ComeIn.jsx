@@ -5,8 +5,8 @@ import EntraceEmailPassword from '../EntranceEmailPassword/EntranceEmailPassword
 import CustomSelect from '../../common/CustomSelect/CustomSelect';
 import { useFormContext } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { resetRegistered } from '../../../redux/user.js';
 
+import { resetRegistered } from '../../../redux/user.js';
 const ComeIn = ({isError, setIsError}) => {
     
     const dispatch = useDispatch();

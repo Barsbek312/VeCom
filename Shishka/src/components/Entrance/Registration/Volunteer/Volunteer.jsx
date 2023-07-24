@@ -68,9 +68,9 @@ const Volunteer = ({startOptionRegion,
 
     useEffect(() => {
 
-        setSelectedDay(selectedDay.replace(/\s/g, ''));
-        setSelectedMonth(selectedMonth.replace(/\s/g, ''));
-        setSelectedYear(selectedYear.replace(/\s/g, ''));
+        setSelectedDay(selectedDay.trim());
+        setSelectedMonth(selectedMonth.trim());
+        setSelectedYear(selectedYear.trim());
 
         const selectedMonthIndex = months.findIndex(month => month.name === selectedMonth);
         const selectedMonthDays = months[selectedMonthIndex] ? months[selectedMonthIndex].days : 0;
@@ -91,7 +91,7 @@ const Volunteer = ({startOptionRegion,
 
       useEffect(() => {
         if(selectedMonth !== "Месяц") {
-            const maxDayOfMonth = months.find(month => month.name === selectedMonth.replace(/\s/g, ''));
+            const maxDayOfMonth = months.find(month => month.name === selectedMonth.trim());
             if(selectedDay > maxDayOfMonth.days && selectedDay !== "День") {
                 setSelectedDay(maxDayOfMonth.days.toString());
             }

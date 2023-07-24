@@ -7,17 +7,25 @@ const path = require("path");
 const loginRoute = require("./routes/auth/login");
 const meRoute = require("./routes/auth/me");
 const registerRoute = require("./routes/auth/register");
-const verifyRoute = require("./routes/auth/verify")
+const verifyRoute = require("./routes/auth/verify");
+const activateRoute = require("./routes/auth/activation");
+const logoutRoute = require("./routes/auth/logout");
+const sendParticipation = require("./routes/event/sendParticipation");
+const getEvents = require("./routes/event/getEvents");
 
 const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(registerRoute);
 app.use(loginRoute);
+app.use(activateRoute);
+app.use(logoutRoute)
 app.use(meRoute);
+app.use(registerRoute);
 app.use(verifyRoute);
+// app.use(sendParticipation);
+// app.use(getEvents);
 
 app.use(express.static("Shishka/build"));
 app.get("*", (req, res) => {

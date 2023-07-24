@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import cp from './CreatePost.module.css';
 import { useForm } from "react-hook-form";
 import chooseImage from './../../assets/images/createPost__icons/choose_image.svg';
+import { compose } from "redux";
+import { WithAuthRedirect } from "../../hoc/WithAuthRedirect";
 
 const CreatePost = () => {
 
@@ -12,7 +14,6 @@ const CreatePost = () => {
 
     const onSubmit = (event, data) => {
         event.preventDefault();
-        console.log(data);
     }
 
     const handleImageUpload = (event) => {
@@ -32,7 +33,6 @@ const CreatePost = () => {
                 .then((results) => {
                     const updatedImages = [...selectedImages, ...results];
                     setSelectedImages(updatedImages);
-                    console.log(selectedImages);
                 })
                 .catch((error) => {
                     console.error("Ошибка чтения файлов:", error);
@@ -118,4 +118,4 @@ const CreatePost = () => {
     )
 }
 
-export default CreatePost;
+export default compose(WithAuthRedirect)(CreatePost);

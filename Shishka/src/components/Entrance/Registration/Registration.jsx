@@ -10,19 +10,20 @@ const Registration = ({startOptionRegion,
     setSelectedOptionRegion,
     startOptionBirthday,
     selectedOptionBirthday,
-    setSelectedOptionBirthday, }) => {
-
-    const [isVolunteer, setIsVolunteer] = useState(true);
+    setSelectedOptionBirthday,
+    isExist,
+    setIsVolRegistration,
+    isVolRegistration }) => {
 
     const listOfWathcingOfPass = ["password", "confirmPassword"];
     
     return(
         <div className={reg.form}>
             <div className={reg.navigator}>
-                <NavLink onClick={() => {setIsVolunteer(true)}} className={isVolunteer ? reg.links + " " + reg.volunteer + " " + reg.active : reg.links + " " + reg.volunteer}>Волонтер</NavLink>
-                <NavLink onClick={() => {setIsVolunteer(false)}} className={isVolunteer ? reg.links + " " + reg.org : reg.links + " " + reg.org + " " + reg.active}>Организация</NavLink>
+                <NavLink onClick={() => {setIsVolRegistration(true)}} className={isVolRegistration ? reg.links + " " + reg.volunteer + " " + reg.active : reg.links + " " + reg.volunteer}>Волонтер</NavLink>
+                <NavLink onClick={() => {setIsVolRegistration(false)}} className={isVolRegistration ? reg.links + " " + reg.org : reg.links + " " + reg.org + " " + reg.active}>Организация</NavLink>
             </div>
-            {isVolunteer ? 
+            {isVolRegistration ? 
             <Volunteer startOptionRegion={startOptionRegion}
                 selectedOptionRegion={selectedOptionRegion}
                 setSelectedOptionRegion={setSelectedOptionRegion}
@@ -31,7 +32,7 @@ const Registration = ({startOptionRegion,
                 setSelectedOptionBirthday={setSelectedOptionBirthday}    
             />  
             : <Organization />}
-            <EntraceEmailPassword listOfWathcingOfPass={listOfWathcingOfPass}/>
+            <EntraceEmailPassword listOfWathcingOfPass={listOfWathcingOfPass} isExist={isExist}/>
         </div>
     )
 }

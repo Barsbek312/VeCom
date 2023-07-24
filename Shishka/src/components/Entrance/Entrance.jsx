@@ -10,16 +10,23 @@ const Entrance = ({
   onSubmitButton,
   isLoading,
   isError,
-  setIsError
+  setIsError,
+  isExist,
+  isRegistration,
+  setIsRegistration
 }) => {
-  const [isRegistration, setIsRegistration] = useState(false);
+
+  const [isVolRegistration, setIsVolRegistration] = useState(false);
 
   const entranceMethodsForm = useForm();
-  const registrationForm = useForm();
-  const { handleSubmit: handleEntranceSubmit } = entranceMethodsForm;
-  const { handleSubmit: handleRegistrationSubmit } = registrationForm;
+  const registrationVolForm = useForm();
+  const registrationOrgForm = useForm();
 
-  const methods = isRegistration ? registrationForm : entranceMethodsForm;
+  const { handleSubmit: handleEntranceSubmit } = entranceMethodsForm;
+  const { handleSubmit: handleRegistrationVolSubmit } = registrationVolForm;
+  const { handleSubmit: handleRegistrationOrgSubmit } = registrationOrgForm;
+
+  const methods = isRegistration ? (isVolRegistration ? registrationVolForm : registrationOrgForm) : entranceMethodsForm;
 
   const startOptionRegion = "Выберите регион";
   const [selectedOptionRegion, setSelectedOptionRegion] = useState(
@@ -30,8 +37,6 @@ const Entrance = ({
   const [selectedOptionBirthday, setSelectedOptionBirthday] = useState(
     startOptionBirthday
   );
-
-  console.log(isLoading)
 
   return (
     <main>
@@ -59,7 +64,7 @@ const Entrance = ({
           <FormProvider {...methods}>
             <form
               className={e.form}
-              onSubmit={isRegistration ? handleRegistrationSubmit(onSubmitButton) : handleEntranceSubmit(onSubmitButton)}
+              onSubmit={isRegistration ? (isVolRegistration ? handleRegistrationVolSubmit(onSubmitButton) : handleRegistrationOrgSubmit(onSubmitButton)) : handleEntranceSubmit(onSubmitButton)}
             >
               {isRegistration ? (
                 <Registration
@@ -69,6 +74,9 @@ const Entrance = ({
                   startOptionBirthday={startOptionBirthday}
                   selectedOptionBirthday={selectedOptionBirthday}
                   setSelectedOptionBirthday={setSelectedOptionBirthday}
+                  isExist={isExist}
+                  setIsVolRegistration={setIsVolRegistration}
+                  isVolRegistration={isVolRegistration}
                 />
               ) : (
                 <ComeIn isError={isError} setIsError={setIsError}/>

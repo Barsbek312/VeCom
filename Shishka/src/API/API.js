@@ -211,41 +211,50 @@ export const imagesAPI = {
 
 }
 
+export const eventAPI = {
+    async getEvents({quantity, currentEvent}) {
+        let res = await instance.get();
+        return res;
+    },
+
+    async sendParticipation(data) {
+        let res = await instance.post();
+        return res;
+    }
+}
+
 
 export const authAPI = {
     
-    async registerUser(userData) {
-        console.log(userData)
+    async register(userData) {
         let res = await instance.post(`^auth/users`, userData);
         return res;
     },
 
     async login(userData) {
-        console.log(userData)
         let res = await instance.post(`api/users/login`, userData);
         return res;
     },
-
-    async logout() {
-        let res = await instance.get(`^auth/users/logout`);
-        return res;
-    },
+    
     async me() {
         let res = await instance.get(`users/me`);
         return res;
     },
 
-    async checkAuth() {
-        let res = await instance.get("");
+    async activate(data) {
+        let res = await instance.post("^auth/users/activation", data);
         return res;
     },
 
-    async verify(data) {
-        let res = await instance.post("^auth/users/activation", data);
-        console.log(res);
+    async verify() {
+        let res = await instance.get("api/users/verify");
         return res;
-    }
+    },
 
+    async logout() {
+        let res = await instance.get(`api/users/logout`);
+        return res;
+    },
 
 }
 

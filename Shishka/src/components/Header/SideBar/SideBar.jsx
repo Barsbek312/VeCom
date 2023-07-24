@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 
 const SideBar = () => {
 
-    const { registered } = useSelector(state => state.user);
+    const { registered, isAuth, user } = useSelector(state => state.user);
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -45,32 +45,34 @@ const SideBar = () => {
         <div className={"wrapper"} {...swipeHandlers}>
             <Menu width={'167px'} isOpen={isSidebarOpen} onStateChange={handleMenuStateChange}>
                 <div className="sidebar__header">
-                    {registered ? 
-                        <>
+                    {isAuth ? 
+                        <NavLink to="/profileVol">
                             <div className="sidebar__ava">
                                 {/* <img src="" alt="sidebar-ava" /> */}
                             </div>
-                            <h2><NavLink to="/profileVol">Войти</NavLink></h2>
-                        </>
+                            <h2>{user && user['first_name']}</h2>
+                        </NavLink>
                     :
-                        <>
+                        <NavLink to="/entrance">
                             <div className="sidebar__ava">
                                 {/* <img src="" alt="sidebar-ava" /> */}
                             </div>
-                            <h2><NavLink to="/entrance">Войти</NavLink></h2>
-                        </>
+                            <h2>Войти</h2>
+                        </NavLink>
                     }
                 </div>
                 <NavLink to="/" className="menu-item">Домой</NavLink>
                 <NavLink to="/settings" className="menu-item">Настройки</NavLink>
                 <NavLink to="/rating" className="menu-item">Рейтинг</NavLink>
                 <NavLink to="/organizations" className="menu-item">Организации</NavLink>
-                <NavLink to="/chat" className="menu-item">Чат</NavLink>
-                <NavLink to="/participantsOfEvent" className="menu-item">Мероприятия</NavLink>
-                <NavLink to="/createPost" className="menu-item">Создать пост</NavLink>
-                <div className="advertising">
+                {/* чат будет на стадии тестирования с колледжом TSI AUCA */}
+                {/* <NavLink to="/chat" className="menu-item">Чат</NavLink> */}
+                {user?.isAdmin && [<NavLink to="/participantsOfEvent" className="menu-item">Мероприятия</NavLink>
+                , <NavLink to="/createPost" className="menu-item">Создать пост</NavLink>]}
+                {/* реклама будет на поздних стадиях последнего этапа */}
+                {/* <div className="advertising">
                     <h3 className="advertisin__title">Реклама</h3>
-                </div>
+                </div> */}
                 <div className="qr_code">
                     <img src={qrCode} alt="qr-code" />
                 </div>

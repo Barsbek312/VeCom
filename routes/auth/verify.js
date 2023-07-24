@@ -1,36 +1,35 @@
 const express = require("express");
-const fetch = (...args) => import("node-fetch").then(({ default: fetch }) => fetch(...args))
+const fetch = (...args) => import("node-fetch").then(({default: fetch}) => fetch(...args));
 
 const router = express.Router();
 
-router.post('/%5Eauth/users/activation', async (req, res) => {
-    const { uid, token } = req.body;
+router.get("/api/users/verify", async (req, res) => {
+    const {access} = req.cookies;
 
     const body = JSON.stringify({
-        uid,
-        token
-    })
+        token: access
+    });
 
     try {
-        const apiRes = await fetch("http://127.0.0.1:8000/%5Eauth/users/activation/", {
+        const apiRes = await fetch('http://127.0.0.1:8000/api/token/verify/', {
             method: "POST",
             headers: {
-                Accept: 'application/json',
+                Accept: "application/json",
                 'Content-Type': "application/json"
             },
             body,
-        });
+        })
 
-        if (apiRes.status === 204) {
-            return res.status(200).json({ success: "Account activated successfully" });
-        } else {
-            const data = await apiRes.json();
-            return res.status(apiRes.status).json(data);
-        }
-    } catch (err) {
+    
+
+        const data = await apiRes.json();
+
+		return res.status(apiRes.status).json(data);
+        
+    } catch(err) {
         return res.status(500).json({
-            error: "Something went wrong when verifying account"
-        });
+			error: 'Something went wrong when trying to verify login status',
+		});
     }
 
 })

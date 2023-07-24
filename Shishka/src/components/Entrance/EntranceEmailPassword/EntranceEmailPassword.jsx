@@ -3,7 +3,7 @@ import EMP from './EntranceEmailPassword.module.css';
 import { useFormContext } from 'react-hook-form';
 import PasswordInput from './PasswordInput/PasswordInput';
 
-const EntraceEmailPassword = ({listOfWathcingOfPass}) => {
+const EntraceEmailPassword = ({listOfWathcingOfPass, isExist}) => {
   const {register, formState: {errors}} = useFormContext()
   const listOfPasswordInput = listOfWathcingOfPass.map( (item, index) => {
     const lengthOfList = listOfWathcingOfPass.length; 
@@ -33,6 +33,7 @@ const EntraceEmailPassword = ({listOfWathcingOfPass}) => {
         />
       </div>
       {listOfPasswordInput}
+      {isExist && <p className={EMP.notExist}>Аккаунт с такой почтой уже существует</p>}
       { listOfWathcingOfPass.length > 1 &&
       <div className={EMP.text__block}>
           <p>Пароль должен содержать хотя бы одну цифру и букву, и иметь минимальную длину - 8 символов.</p>

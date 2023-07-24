@@ -14,7 +14,7 @@ import ParticipantsOfEvent from './components/ParticipantsOfEvent/ParticipantsOf
 import Verify from './components/Verify/AcceptVerify/Verify';
 import MessageAboutVerify from './components/Verify/MessageAboutVerify/MessageAboutVerify';
 import { useDispatch } from 'react-redux';
-import { resetRegistered } from './redux/user.js';
+import { checkAuth } from './redux/user.js';
 
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(resetRegistered());
+    dispatch(checkAuth());
   }, [])
 
   return (

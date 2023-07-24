@@ -1,14 +1,12 @@
 import { authAPI } from "../API/API";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-const SET_USER_DATA = "shishka/auth/SET_USER_DATA";
+export const register = createAsyncThunk("users/register", async (data, thunkAPI) => {
 
-export const register = createAsyncThunk("users/register", async (user, thunkAPI) => {
-    const body = JSON.stringify(user)
+    const body = JSON.stringify(data);
 
     try{
-        const res = await authAPI.registerUser(body);
-        
+        const res = await authAPI.register(body);
         if(res.status === 201) {
             return res;
         } else {
@@ -16,25 +14,9 @@ export const register = createAsyncThunk("users/register", async (user, thunkAPI
             return thunkAPI.rejectWithValue(error);
         }
     } catch(err) {
-        console.log(err);
         return thunkAPI.rejectWithValue(err.response.data);
     }  
     
-})
-
-const getUser = createAsyncThunk('users/me', async (_, thunkAPI) => {
-    try{
-        const res = await authAPI.me();
-
-        if(res.status === 200) {
-            return res.data;
-        } else {
-            const error = await res.text();
-            return thunkAPI.rejectWithValue(error);
-        }
-    } catch(err) {
-        return thunkAPI.rejectWithValue(err.response.data);
-    }
 })
 
 export const login = createAsyncThunk("users/login", async (user, thunkAPI) => {
@@ -51,10 +33,58 @@ export const login = createAsyncThunk("users/login", async (user, thunkAPI) => {
             return thunkAPI.rejectWithValue(error);
         }
     } catch(err) {
-        console.log(err);
         return thunkAPI.rejectWithValue(err.response.data);
     }  
     
+})
+
+const getUser = createAsyncThunk('users/me', async (_, thunkAPI) => {
+    try{
+        const res = await authAPI.me();
+
+        if(res.status === 200) {
+            return res;
+        } else {
+            const error = await res.text();
+            return thunkAPI.rejectWithValue(error);
+        }
+    } catch(err) {
+        return thunkAPI.rejectWithValue(err.response.data);
+    }
+})
+
+export const checkAuth = createAsyncThunk("users/verify", async (_, thunkAPI) => {
+
+    try{
+        const res = await authAPI.verify();
+        
+        if(res.status === 200) {
+            const {dispatch} = thunkAPI;
+            dispatch(getUser());
+            return res;
+        } else {
+            const error = await res.text();
+            return thunkAPI.rejectWithValue(error);
+        }
+    } catch(err) {
+        return thunkAPI.rejectWithValue(err.response.data);
+    }  
+})
+
+export const activate = createAsyncThunk("users/activation", async (data, thunkAPI) => {
+    const body = JSON.stringify(data);
+
+    try{
+        const res = await authAPI.activate(body);
+        if(res.status === 200) {
+            return res;
+        } else {
+            const error = await res.text();
+            return thunkAPI.rejectWithValue(error);
+        }
+    } catch(err) {
+        return thunkAPI.rejectWithValue(err.response.data);
+    }
 })
 
 export const logout = createAsyncThunk("users/logout", async (_, thunkAPI) => {
@@ -69,41 +99,9 @@ export const logout = createAsyncThunk("users/logout", async (_, thunkAPI) => {
             return thunkAPI.rejectWithValue(error);
         }
     } catch(err) {
-        console.log(err);
         return thunkAPI.rejectWithValue(err.response.data);
     }  
     
-})
-
-export const checkAuth = createAsyncThunk("users/checkAuth", async (_, thunkAPI) => {
-
-    try{
-        const res = await authAPI.verify();
-        
-        if(res.status === 200) {
-            const {dispatch} = thunkAPI();
-            dispatch(getUser());
-            return res;
-        } else {
-            const error = await res.text();
-            return thunkAPI.rejectWithValue(error);
-        }
-    } catch(err) {
-        console.log(err);
-        return thunkAPI.rejectWithValue(err.response.data);
-    }  
-})
-
-export const verify = createAsyncThunk("users/verify", async (data, thunkAPI) => {
-    const body = JSON.stringify(data);
-    console.log(body);
-    try{
-        const res = await authAPI.verify(body);
-        return res;
-    } catch(err) {
-        console.log(err);
-        return thunkAPI.rejectWithValue(err.response.data);
-    }
 })
 
 let initialState = {
@@ -112,19 +110,6 @@ let initialState = {
     registered: false,
     activated: false,
     isAuth: false,
-    // user: {
-    //     userId: null,
-    //     firstName: null,
-    //     secondName: null,
-    //     phoneNumber: null,
-    //     email: null,
-    //     birthday: null,
-    //     region: null,
-    //     city: null,
-    //     isAdmin: false,
-    //     certificated: null,
-    //     hours: null,
-    // }
 }
 
 const userSlice = createSlice({
@@ -140,8 +125,7 @@ const userSlice = createSlice({
             .addCase(register.pending, state => {
                 state.loading = true;
             })
-            .addCase(register.fulfilled, (state, action) => {
-                console.log(action);
+            .addCase(register.fulfilled, (state) => {
                 state.loading = false;
                 state.registered = true;
             })
@@ -163,7 +147,7 @@ const userSlice = createSlice({
             })
             .addCase(getUser.fulfilled, (state, action) => {
                 state.loading = false;
-                state.user = action.payload;
+                state.user = action.payload.data;
             })
             .addCase(getUser.rejected, state => {
                 state.loading = false;
@@ -178,13 +162,15 @@ const userSlice = createSlice({
             .addCase(checkAuth.rejected, state => {
                 state.loading = false;
             })
-            .addCase(verify.pending, state => {
+            .addCase(activate.pending, state => {
                 state.loading = true;
             })
-            .addCase(verify.fulfilled, state => {
-                state.loading = true;
-                state.isAuth = true;
+            .addCase(activate.fulfilled, state => {
+                state.loading = false;
                 state.activated = true;
+            })
+            .addCase(activate.rejected, state => {
+                state.loading = false;
             })
             .addCase(logout.pending, state => {
                 state.loading = true;

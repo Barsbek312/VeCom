@@ -21,32 +21,29 @@ router.post('/api/users/login', async (req, res) => {
         const data = await apiRes.json();
 
         if(apiRes.status === 200) {
-            res.setHeader("Set-Cookie", [
-                cookie.serialize('access', data.access, 
-                    {
-                        httpOnly: true,
-                        maxAge: 60 * 30,
-                        path: "/",
-                        sameSite: "strict",
-                        secure: true,
-                    }
-                ),
-                cookie.serialize('refresh', data.refresh, 
-                    {
-                        httpOnly: true,
-                        maxAge: 60 * 60 * 24,
-                        path: "/",
-                        sameSite: "strict",
-                        secure: true,
-                    }
-                ),
-            ])
+            const cookies = [
+                cookie.serialize('access', data.access, {
+                  httpOnly: true,
+                  maxAge: 60 * 30,
+                  sameSite: "strict",
+                  secure: true,
+                  path: "/"
+                }),
+                cookie.serialize('refresh', data.refresh, {
+                  httpOnly: true,
+                  maxAge: 60 * 60 * 24,
+                  sameSite: "strict",
+                  secure: true,
+                  path: "/"
+                })
+              ];
+          
+              res.setHeader("Set-Cookie", cookies);
             return res.status(200).json({success: "Logged in successfully"})
         } else{ 
             return res.status(apiRes.status).json(data)
         }
     } catch(err) {
-        console.log("Error:", err);
         return res.status(500).json({
             error: "Something went wrong when logging in"
         })

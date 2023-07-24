@@ -6,7 +6,6 @@ const router = express.Router();
 
 router.get('/users/me', async (req, res) => {
     const {access} = req.cookies;
-
     try{
         const apiRes = await fetch("http://127.0.0.1:8000/^auth/users/me", {
             method: "GET",
@@ -15,8 +14,6 @@ router.get('/users/me', async (req, res) => {
                 Authorization: `Bearer ${access}`  
             }
         })
-
-        console.log(apiRes);
 
         const data = await apiRes.json();
 
