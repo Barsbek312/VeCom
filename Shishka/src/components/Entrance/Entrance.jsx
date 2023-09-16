@@ -1,19 +1,20 @@
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import e from "./Entrance.module.css";
 import { NavLink, Navigate } from "react-router-dom";
 import ComeIn from "./ComeIn/ComeIn";
 import Registration from "./Registration/Registration";
 import EntranceMethod from "./EntranceMethod/EntranceMethod";
 import { useForm, FormProvider } from "react-hook-form";
+import { useSelector } from "react-redux";
 
 const Entrance = ({
   onSubmitButton,
-  isLoading,
   isError,
   setIsError,
-  isExist,
+  isExistInReg,
   isRegistration,
-  setIsRegistration
+  setIsRegistration,
+  isExistInLogin
 }) => {
 
   const [isVolRegistration, setIsVolRegistration] = useState(false);
@@ -28,21 +29,19 @@ const Entrance = ({
 
   const methods = isRegistration ? (isVolRegistration ? registrationVolForm : registrationOrgForm) : entranceMethodsForm;
 
-  const startOptionRegion = "Выберите регион";
+  const startOptionRegion = "Select a region";
   const [selectedOptionRegion, setSelectedOptionRegion] = useState(
     startOptionRegion
   );
 
-  const startOptionBirthday = "Дата рождения";
-  const [selectedOptionBirthday, setSelectedOptionBirthday] = useState(
-    startOptionBirthday
-  );
+  const {loading} = useSelector(state => state.user);
+
 
   return (
     <main>
       <div className="container">
         <div className={e.entrance__wrapper}>
-          <h2>Добро пожаловать</h2>
+          <h2>Welcome</h2>
           <div className={e.navigator}>
             <NavLink
               className={isRegistration ? `${e.check}` : e.check + " " + e.active}
@@ -50,7 +49,7 @@ const Entrance = ({
                 setIsRegistration(false);
               }}
             >
-              Вход
+              Log in
             </NavLink>
             <NavLink
               className={isRegistration ? e.check + " " + e.active : `${e.check}`}
@@ -58,7 +57,7 @@ const Entrance = ({
                 setIsRegistration(true);
               }}
             >
-              Регистрация
+              Sign up
             </NavLink>
           </div>
           <FormProvider {...methods}>
@@ -71,20 +70,17 @@ const Entrance = ({
                   startOptionRegion={startOptionRegion}
                   selectedOptionRegion={selectedOptionRegion}
                   setSelectedOptionRegion={setSelectedOptionRegion}
-                  startOptionBirthday={startOptionBirthday}
-                  selectedOptionBirthday={selectedOptionBirthday}
-                  setSelectedOptionBirthday={setSelectedOptionBirthday}
-                  isExist={isExist}
+                  isExistInReg={isExistInReg}
                   setIsVolRegistration={setIsVolRegistration}
                   isVolRegistration={isVolRegistration}
                 />
               ) : (
-                <ComeIn isError={isError} setIsError={setIsError}/>
+                <ComeIn isError={isError} setIsError={setIsError} isExistInLogin={isExistInLogin}/>
               )}
               {isRegistration ? (
-                isLoading ? <EntranceMethod textOfBtn={"Чуточку терпения😙"} background="#333333CC" /> : <EntranceMethod textOfBtn={"Зарегистрироваться"} />
+                loading ? <EntranceMethod textOfBtn={"A little patience😙"} background="#333333CC" /> : <EntranceMethod textOfBtn={"Register"} />
               ) : (
-                isLoading ? <EntranceMethod textOfBtn={"Чуточку терпения😙"} background="#333333CC"/> : <EntranceMethod textOfBtn={"Войти"} />
+                loading ? <EntranceMethod textOfBtn={"A little patience😙"} background="#333333CC"/> : <EntranceMethod textOfBtn={"Log in"} />
               )}
             </form>
           </FormProvider>

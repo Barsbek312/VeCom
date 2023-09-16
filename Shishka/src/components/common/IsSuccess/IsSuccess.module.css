@@ -1,0 +1,48 @@
+.notification {
+    position: fixed;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    padding: 12px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    text-align: center;
+    border-radius: 7px;
+    opacity: 0;
+    z-index: 100;
+}
+
+.notification.visible {
+    animation: slideAndFadeIn 0.3s ease-in-out forwards;
+}
+
+.notification.success {
+    background-color: #4caf50;
+}
+
+.notification.error {
+    background-color: #f44336;
+}
+
+@keyframes slideAndFadeIn {
+    0% {
+        top: -100px;
+        opacity: 0;
+    }
+    100% {
+        top: 20px;
+        opacity: 1;
+    }
+}
+
+@keyframes slideAndFadeOut {
+    0% {
+        top: 20px;
+        opacity: 1;
+    }
+    100% {
+        top: -100px;
+        opacity: 0;
+    }
+}

@@ -15,12 +15,10 @@ router.get("/api/users/verify", async (req, res) => {
             method: "POST",
             headers: {
                 Accept: "application/json",
-                'Content-Type': "application/json"
+                'Content-Type': "application/json",
             },
             body,
         })
-
-    
 
         const data = await apiRes.json();
 

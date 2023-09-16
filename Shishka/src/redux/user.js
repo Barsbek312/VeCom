@@ -10,8 +10,7 @@ export const register = createAsyncThunk("users/register", async (data, thunkAPI
         if(res.status === 201) {
             return res;
         } else {
-            const error = await res.text();
-            return thunkAPI.rejectWithValue(error);
+            return thunkAPI.rejectWithValue(res);
         }
     } catch(err) {
         return thunkAPI.rejectWithValue(err.response.data);
@@ -76,6 +75,7 @@ export const activate = createAsyncThunk("users/activation", async (data, thunkA
 
     try{
         const res = await authAPI.activate(body);
+
         if(res.status === 200) {
             return res;
         } else {
@@ -109,7 +109,8 @@ let initialState = {
     loading: false,
     registered: false,
     activated: false,
-    isAuth: false,
+    isAuth: null,
+    status: null,
 }
 
 const userSlice = createSlice({
@@ -141,6 +142,7 @@ const userSlice = createSlice({
             })
             .addCase(login.rejected, state => {
                 state.loading = false;
+                state.isAuth = false;
             })
             .addCase(getUser.pending, state => {
                 state.loading = true;
@@ -161,6 +163,7 @@ const userSlice = createSlice({
             })
             .addCase(checkAuth.rejected, state => {
                 state.loading = false;
+                state.isAuth = false;
             })
             .addCase(activate.pending, state => {
                 state.loading = true;

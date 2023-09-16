@@ -8,10 +8,11 @@ import { Navigate } from "react-router-dom";
 const EntranceContainer = (props) => {
 
     const dispatch = useDispatch();
-    const { registered, loading, isAuth } = useSelector(state => state.user);
+    const { registered, isAuth } = useSelector(state => state.user);
 
     const [isError, setIsError] = useState(false);
-    const [isExist, setIsExist] = useState(false);
+    const [isExistInReg, setIsExistInReg] = useState(false);
+    const [isExistInLogin, setIsExistInLogin] = useState(false);
     const [isRegistration, setIsRegistration] = useState(false);
 
     const onSubmitButton = async (data, event) => {
@@ -23,48 +24,53 @@ const EntranceContainer = (props) => {
             if(!isError) {
                 data.status = data?.status?.trim();
                 data.username = data?.email;
-                if(data?.status === "Волонтер") {
-                    delete data.status;
-                    delete data.email;
-                    dispatch(login(data, true));
-                } else{
-                    delete data.status;
-                    delete data.email;
-                    dispatch(login(data, false));
+                delete data.status;
+                delete data.email;
+                const res = await dispatch(login(data));
+                const checkOnExist = "No active account found with the given credentials";
+                if(res?.payload?.detail && res?.payload?.detail === checkOnExist) {
+                    setIsExistInLogin(true);
                 }
-            }
+            }   
         } 
         else {
             delete data?.confirmPassword;
             data['username'] = data['email'];
             let isVol = false;
+            data["hours"] = 0;
+            data['certificated'] = false;
             if(dataLength > 4) {
-                data["hours"] = 0;
-                data['certificated'] = false;
                 isVol = true;
+            } else {
+                data['second_name'] = null;
+                data['birthday'] = null;
+                data["phoneNumber"] = "";
+                data['region'] = "";
+                data['city'] = null;
             }
-            data.isVol = isVol;
-            const res = await dispatch(register(data));
 
-            if(res?.payload?.username[0] === "A user with that username already exists.") {
-                setIsExist(true);
+            data.isOrg = !isVol;
+            const res = await dispatch(register(data));
+            const checktext = "A user with that username already exists.";
+            if(res?.payload?.username?.[0] === checktext) {
+                setIsExistInReg(true);
             }
         }
     }
 
     if(registered) return <Navigate to="/messageVerify" />
-    if(isAuth) return <Navigate to="/" />
+    if(isAuth === true) return <Navigate to="/" />
 
 
 
     return (
         <Entrance onSubmitButton={onSubmitButton} 
-            isLoading={loading}
             isError={isError}
             setIsError={setIsError}
-            isExist={isExist}
+            isExistInReg={isExistInReg}
             isRegistration={isRegistration}
-            setIsRegistration={setIsRegistration}/>
+            setIsRegistration={setIsRegistration}
+            isExistInLogin={isExistInLogin}/>
     )
 
 }
@@ -75,5 +81,5 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {register})(EntranceContainer);
+export default connect(mapStateToProps, {})(EntranceContainer);
 // export default connect(mapStateToProps, {login})(EntranceContainer);

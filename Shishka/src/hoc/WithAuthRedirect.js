@@ -6,9 +6,13 @@ export const WithAuthRedirect = (Component) => {
 
     const RedirectComponent = (props) => {
         const {isAuth} = useSelector(state => state.user);
-        if(!isAuth) return <Navigate to="/entrance" />
+        
+        if(isAuth === false) return <Navigate to="/entrance" />
         return <Component {...props} />
     }
 
     return RedirectComponent;
 }
+
+
+  

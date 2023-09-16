@@ -41,7 +41,9 @@ const Header = () => {
                 <SideBar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} isScrolled={isScrolled}/>
                 <div className={h.wrapper__input} id="page-wrap">
                     <input type="text" className={h.input} placeholder="Введите запрос"/>
-                    <button className={h.btn}><img src={audio} alt="audio-speech"/></button>
+                    {/* временное комментирование  */}
+                    {/* <button className={h.btn}><img src={audio} alt="audio-speech"/></button> */}
+                    {/* временное комментирование  */}
                 </div>
                 <div className={h.avatar}>
                     {/* <img src="" alt="avatar-img" /> */}

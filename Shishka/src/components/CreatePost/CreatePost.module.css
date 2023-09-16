@@ -96,3 +96,8 @@
     font-size: 20px;
     cursor: pointer;
 }
+
+.startDate > div, .endDate > div {
+    height: 50px;
+    margin-top: 20px;
+}

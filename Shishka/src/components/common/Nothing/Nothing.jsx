@@ -5,7 +5,7 @@ import n from './Nothing.module.css';
 const Nothing = () => {
     return (
         <div className={n.block}>
-            <h2 className={n.title}>Пока ничего нет</h2>
+            <h2 className={n.title}>There is nothing yet</h2>
             <div className={n.img__wrapper}>
                 <img src={nothing} alt="there is nothing" />
             </div>

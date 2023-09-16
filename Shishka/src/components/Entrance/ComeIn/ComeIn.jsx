@@ -7,7 +7,7 @@ import { useFormContext } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 
 import { resetRegistered } from '../../../redux/user.js';
-const ComeIn = ({isError, setIsError}) => {
+const ComeIn = ({isError, setIsError, isExistInLogin}) => {
     
     const dispatch = useDispatch();
     const {setValue, getValues} = useFormContext();
@@ -15,8 +15,8 @@ const ComeIn = ({isError, setIsError}) => {
     const listOfWathcingOfPass = ["password"];
 
 
-    const startOption = "Выберите ваше положение";
-    const [options, setOptions] = useState(["Волонтер", "Организатор"]);
+    const startOption = "Choose your position";
+    const [options, setOptions] = useState(["Volunteer", "Organizer"]);
     const [selectedStatus, setSelectedStatus] = useState(startOption);
 
     useEffect(() => {
@@ -37,7 +37,7 @@ const ComeIn = ({isError, setIsError}) => {
 
     return (
         <div className={come.form}>
-            <div className={come.select__wrapper} style={{marginBottom: isError ? 30 : null}}>
+            {/* <div className={come.select__wrapper} style={{marginBottom: isError ? 30 : null}}>
                 <CustomSelect 
                     options={options}
                     startOption={startOption}
@@ -52,10 +52,10 @@ const ComeIn = ({isError, setIsError}) => {
                 />
                 {isError && 
                 <div className={come.error}>Выберите пожалуйста опцию для дальнейшего продолжения</div>}
-            </div>
-            <EntraceEmailPassword listOfWathcingOfPass={listOfWathcingOfPass}/>
+            </div> */}
+            <EntraceEmailPassword listOfWathcingOfPass={listOfWathcingOfPass} isExistInLogin={isExistInLogin}/>
             <div className={come.forget__password}>
-                <a>Забыли пароль ?</a>
+                {/* <a>Забыли пароль ?</a> */}
             </div>
         </div>
     )

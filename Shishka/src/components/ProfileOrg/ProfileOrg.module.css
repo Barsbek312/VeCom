@@ -7,6 +7,14 @@
     margin-bottom: 40px;
 }
 
+/* временное */
+
+.header {
+    margin-bottom: 20px;
+}
+
+/* временное */
+
 .header > div{
     width: 100%;
 }
@@ -117,14 +125,15 @@
     margin-top: -20px;
 }
 
-.post__item{
-    margin-bottom: 25px;
+/* Временное */
+
+.posts > span{
+    margin-left: 15px;
+    font-size: 16px;
 }
 
-.post__item > h3{
-    margin-left: 22px;
-    margin-bottom: 15px;
-    font-size: 16px;
-    font-family: "Calibri", sans-serif;
-    font-weight: 400;
+.wrapper__posts{
+    margin-top: 10px;
 }
+
+/* временное */

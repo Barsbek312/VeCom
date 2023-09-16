@@ -22,15 +22,15 @@ const PasswordInput = ({ namePassword="password", watchingOfPass="", placeholder
     }
     const check = watchingOfPass ? 
     {...register(namePassword, {
-            required: "Пароль является обязательным полем",
+            required: "Password is a required field",
             pattern: {
                 value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                message: "Пароль должен содержать хотя бы одну цифру и букву, и иметь минимальную длину - 8 символов",
+                message: "The password must contain at least one digit and letter, and have a minimum length of 8 characters",
             },
-            validate: (value) => value === watch(watchingOfPass) || "Пароли не совпадают",
+            validate: (value) => value === watch(watchingOfPass) || "Passwords don't match",
     })} :
     {...register(null, {
-        required: "Пароль является обязательным полем",
+        required: "Password is a required field",
     })}
     // const check = () => {
     //     if(watchingOfPass) {

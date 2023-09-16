@@ -9,16 +9,16 @@ const MessageAboutVerify = () => {
         <main className={v2.main__wrapper}>
             <div className="container">
                 <div className={v2.modal}>
-                    <h3>Сообщение отправлено</h3>
+                    <h3>The message has been sent</h3>
                     <p style={{marginTop: 20, marginBottom: 20}}>
-                        Подтвердите, что это Ваша почта, перейдя по ссылке на вашей почте
+                        Confirm that this is your mail by clicking on the link on your mail
                     </p>
                     <button
                         className={v2.modal__exit}
                         type="button"
-                        onClick={() => {setIsHandleClick(true); console.log(isHandleClick)}}
+                        onClick={() => {setIsHandleClick(true);}}
                     >
-                        Изменить адрес электронной почты
+                        Change Email Address
                     </button>
                 </div>
             </div>

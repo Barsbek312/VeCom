@@ -10,11 +10,11 @@ const Organization = () => {
         <div className={o.wrapper}>
             <div className={o.organization_input}>
                 <input 
-                    {...register("name", {required: "Название организации является обязательным полем"})} 
+                    {...register("first_name", {required: "The name of the organization is a mandatory field"})} 
                     type="text" 
                     className='entrance_input' 
-                    placeholder={errors["name"] ? errors["name"].message : "Название организации"}
-                    style={{borderColor: errors["name"] ? "red" : "#4B6DE3"}}/>
+                    placeholder={errors["first_name"] ? errors["first_name"].message : "Name of the organization"}
+                    style={{borderColor: errors["first_name"] ? "red" : "#4B6DE3"}}/>
             </div>
         </div>
     )

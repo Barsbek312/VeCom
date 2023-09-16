@@ -19,7 +19,7 @@ const CustomSelect = ({
     setSelectedOption = () => { },
     zindex = 2,
     isNeedSelect = false,
-    absenceMessage="Пока ничего нет. Прошу прощения за предоставленные неудобства",
+    absenceMessage="There is nothing yet. I apologize for the inconvenience",
 }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isSelectedOption, setIsSelectedOption] = useState(false);

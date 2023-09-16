@@ -8,3 +8,12 @@
 .posts__wrapper{
     margin-top: 20px;
 }
+
+.posts__wrapper > div {
+    margin-bottom: 15px;
+}
+
+.loader__wrapper{
+    background: #fff;
+    padding: 10px 15px;
+}

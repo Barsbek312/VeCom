@@ -7,7 +7,8 @@ const EntranceMethod = ({textOfBtn, background=""}) => {
             <div className={ECom.comeIn}>
                 <button type={"submit"} style={{backgroundColor: background ? background : null}}>{textOfBtn}</button>
             </div>
-            <div className={ECom.or}>
+            {/* временное комментирование */}
+            {/* <div className={ECom.or}>
                 <div></div>
                 <span>Или</span>
                 <div></div>
@@ -19,7 +20,8 @@ const EntranceMethod = ({textOfBtn, background=""}) => {
                 <a>
                     <button type="button" className={ECom.apple}>Apple</button>
                 </a>
-            </div>
+            </div> */}
+            {/* временное комментирование */}
         </div>
     )
 }

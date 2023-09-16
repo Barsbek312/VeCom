@@ -4,17 +4,15 @@ import '../../EntranceInput.css';
 import arrow from './../../../../assets/images/common__images/arrow.svg';
 import CustomSelect from '../../../common/CustomSelect/CustomSelect';
 import { useFormContext } from "react-hook-form";
-import WrapperSelect from "../../../common/CustomSelect/WrapperSelect/WrapperSelect";
+import DateComponent from "../../../common/Date/DateComponent";
 
-const Volunteer = ({startOptionRegion, 
-    selectedOptionRegion, 
-    setSelectedOptionRegion, 
-    startOptionBirthday,
-    selectedOptionBirthday,
-    setSelectedOptionBirthday}) => {
+const Volunteer = ({ startOptionRegion,
+    selectedOptionRegion,
+    setSelectedOptionRegion,
+}) => {
 
     // region(begin)
-    const { register, setValue, formState: {errors} } = useFormContext()
+    const { register, setValue, formState: { errors } } = useFormContext()
 
     useEffect(() => {
         if (selectedOptionRegion !== startOptionRegion) {
@@ -29,148 +27,74 @@ const Volunteer = ({startOptionRegion,
     }, [selectedOptionRegion])
 
     const optionsRegions = {
-        "Кыргызстан": ["Чуй", "Талас", "Иссык-Куль", "Джалал-Абад", "Нарын", "Ош", "Баткен"],
-        "Казакстан": [],
-        "Узбекистан": [],
-        "Таджикистан": [],
-        "Азербайджан": [],
-        "Грузия": []
+        "Kyrgyzstan": ["Chui", "Talas", "Issyk-Kul", "Jalal-Abad", "Naryn", "Osh", "Batken"],
+        // "Казакстан": [],
+        // "Узбекистан": [],
+        // "Таджикистан": [],
+        // "Азербайджан": [],
+        // "Грузия": []
     }
 
     //region(end)
 
-    
-    // birthday(begin)
-    const [isOpen, setIsOpen] = useState(false);
+    const [years, setYears] = useState(Array.from({ length: 100 }, (_, index) => 2023 - index));
 
-    const [selectedYear, setSelectedYear] = useState("Год");
-    const [selectedMonth, setSelectedMonth] = useState("Месяц");
-    const [selectedDay, setSelectedDay] = useState("День");
+    const [months, setMonths] = useState([
+        { name: "January", days: 31 },
+        { name: "February", days: 28 },
+        { name: "March", days: 31 },
+        { name: "April", days: 30 },
+        { name: "May", days: 31 },
+        { name: "June", days: 30 },
+        { name: "July", days: 31 },
+        { name: "August", days: 31 },
+        { name: "September", days: 30 },
+        { name: "October", days: 31 },
+        { name: "November", days: 30 },
+        { name: "December", days: 31 }
+    ])
 
-    const years = Array.from({ length: 100 }, (_, index) => 2023 - index);
-
-    const months = [
-        { name: "Январь", days: 31 },
-        { name: "Февраль", days: 28 },
-        { name: "Март", days: 31 },
-        { name: "Апрель", days: 30 },
-        { name: "Май", days: 31 },
-        { name: "Июнь", days: 30 },
-        { name: "Июль", days: 31 },
-        { name: "Август", days: 31 },
-        { name: "Сентябрь", days: 30 },
-        { name: "Октябрь", days: 31 },
-        { name: "Ноябрь", days: 30 },
-        { name: "Декабрь", days: 31 }
-    ];;
-
-    const [days, setDays] = useState([]);
-
-    useEffect(() => {
-
-        setSelectedDay(selectedDay.trim());
-        setSelectedMonth(selectedMonth.trim());
-        setSelectedYear(selectedYear.trim());
-
-        const selectedMonthIndex = months.findIndex(month => month.name === selectedMonth);
-        const selectedMonthDays = months[selectedMonthIndex] ? months[selectedMonthIndex].days : 0;
-
-        const daysArray = Array.from({ length: selectedMonthDays }, (_, index) => index + 1);
-        setDays(daysArray);
-
-        const viewOfSelectedMonth = selectedMonthIndex < 9 ? `0${selectedMonthIndex+1}` : selectedMonthIndex+1;
-        const viewOfSelectedDay = selectedDay < 9 ? `0${selectedDay}` : selectedDay;
-
-        setValue("birthday", `${viewOfSelectedDay}.${viewOfSelectedMonth}.${selectedYear}`);
-
-        if(selectedDay !== "День" && selectedMonth !== "Месяц" && selectedYear !== "Год"){
-            setSelectedOptionBirthday(`${viewOfSelectedDay}.${viewOfSelectedMonth}.${selectedYear}`);
-        } 
-
-      }, [ selectedDay, selectedMonth, selectedYear, setValue]);
-
-      useEffect(() => {
-        if(selectedMonth !== "Месяц") {
-            const maxDayOfMonth = months.find(month => month.name === selectedMonth.trim());
-            if(selectedDay > maxDayOfMonth.days && selectedDay !== "День") {
-                setSelectedDay(maxDayOfMonth.days.toString());
-            }
-        }
-      }, [selectedMonth])
-      
-
-    let optionsBirthday = [
-        <CustomSelect
-            options={years.map((year) => year.toString())}
-            parrentIsOpen={isOpen}
-            startOption="Год"
-            isNeedArrow={true}
-            isNeedIcon={false}
-            paddingLeftInput={10}
-            paddingRightInput={15}
-            borderSelect={true}
-            justifyContentText={"flex-start"}
-            selectedOption={selectedYear}
-            setSelectedOption={setSelectedYear}
-        />,
-        <CustomSelect
-            options={months.map((month) => month.name)}
-            parrentIsOpen={isOpen}
-            startOption="Месяц"
-            isNeedArrow={true}
-            isNeedIcon={false}
-            paddingLeftInput={10}
-            paddingRightInput={15}
-            borderSelect={true}
-            justifyContentText={"flex-start"}
-            selectedOption={selectedMonth}
-            setSelectedOption={setSelectedMonth}
-        />,
-        <CustomSelect
-            options={days.map((day) => day.toString())}
-            parrentIsOpen={isOpen}
-            startOption="День"
-            isNeedArrow={true}
-            isNeedIcon={false}
-            paddingLeftInput={10}
-            paddingRightInput={15}
-            borderSelect={true}
-            justifyContentText={"flex-start"}
-            selectedOption={selectedDay}
-            setSelectedOption={setSelectedDay}
-            absenceMessage="Выберите месяц, чтобы выбрать день"
-        />,
-    ];
-    // birthday(end)
+    const startOptionBirthday = "Date of birth";
+    const nameOfBirthday = "birthday"
 
     return (
         <div className={v.wrapper}>
             <div className={v.name__input}>
                 <input
                     {...register('first_name', {
-                        required: "Имя является обязательным полем",
+                        required: "The name is a required field",
                     })}
                     className="entrance_input"
                     type="text"
-                    placeholder={errors["first_name"] ? errors["first_name"].message : "Имя"}
-                    style={{borderColor: errors["first_name"] ? "red" : "#4B6DE3"}}
-                     />
+                    placeholder={errors["first_name"] ? errors["first_name"].message : "Name"}
+                    style={{ borderColor: errors["first_name"] ? "red" : "#4B6DE3" }}
+                />
             </div>
             <input
                 {...register('second_name', {
-                    required: "Фамилия является обязательным полем",
+                    required: "Last name is a required field",
                 })}
                 className="entrance_input"
                 type="text"
-                placeholder={errors["second_name"] ? errors["second_name"].message : "Фамилия"}
-                style={{borderColor: errors["second_name"] ? "red" : "#4B6DE3"}} />
+                placeholder={errors["second_name"] ? errors["second_name"].message : "Surname"}
+                style={{ borderColor: errors["second_name"] ? "red" : "#4B6DE3" }} />
             <div className={v.mobile}>
                 <input
-                    {...register('phoneNumber')}
+                    {...register('phoneNumber', {
+                        required: "Does not correspond to the Kyrgyz number",
+                        pattern: /^\+996[0-9]{9}$/
+                    })}
                     className="entrance_input"
-                    type="text"
-                    placeholder="Мобильный"
+                    type="tel"
+                    style={{ borderColor: errors["phoneNumber"] ? "red" : "#4B6DE3" }}
+                    defaultValue="+996"
+                    onInput={(e) => {
+                        if (!e.target.value.startsWith('+996')) {
+                            e.target.value = '+996' + e.target.value.substring(4);
+                        }
+                    }}
                 />
+
             </div>
             <div className={v.select__wrapper}>
                 <CustomSelect
@@ -189,24 +113,7 @@ const Volunteer = ({startOptionRegion,
                 />
             </div>
             <div className={v.birthday__wrapper}>
-                <WrapperSelect
-                    alignFlex={true}
-                    isOpen={isOpen}
-                    setIsOpen={setIsOpen}
-                    paddingLeftInput={40}
-                    paddingRightInput={15}
-                    borderSelect={false}
-                    isNeedIcon={true}
-                    icon={"birthday"}
-                    isNeedArrow={true}
-                    setSelectedOption={setSelectedOptionBirthday}
-                    startOption={startOptionBirthday}
-                    selectedOption={selectedOptionBirthday}
-                    justifyContentText={"flex-start"}
-                    listOfItems={optionsBirthday}
-                    zindex={10}
-                />
-
+                <DateComponent setValue={setValue} setValueName={nameOfBirthday} startOptionDate={startOptionBirthday} years={years} months={months}/>
             </div>
         </div>
     )

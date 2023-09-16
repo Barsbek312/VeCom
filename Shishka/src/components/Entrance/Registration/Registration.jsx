@@ -8,10 +8,7 @@ import EntraceEmailPassword from '../EntranceEmailPassword/EntranceEmailPassword
 const Registration = ({startOptionRegion,
     selectedOptionRegion,
     setSelectedOptionRegion,
-    startOptionBirthday,
-    selectedOptionBirthday,
-    setSelectedOptionBirthday,
-    isExist,
+    isExistInReg,
     setIsVolRegistration,
     isVolRegistration }) => {
 
@@ -20,19 +17,16 @@ const Registration = ({startOptionRegion,
     return(
         <div className={reg.form}>
             <div className={reg.navigator}>
-                <NavLink onClick={() => {setIsVolRegistration(true)}} className={isVolRegistration ? reg.links + " " + reg.volunteer + " " + reg.active : reg.links + " " + reg.volunteer}>Волонтер</NavLink>
-                <NavLink onClick={() => {setIsVolRegistration(false)}} className={isVolRegistration ? reg.links + " " + reg.org : reg.links + " " + reg.org + " " + reg.active}>Организация</NavLink>
+                <NavLink onClick={() => {setIsVolRegistration(true)}} className={isVolRegistration ? reg.links + " " + reg.volunteer + " " + reg.active : reg.links + " " + reg.volunteer}>Volunteer</NavLink>
+                <NavLink onClick={() => {setIsVolRegistration(false)}} className={isVolRegistration ? reg.links + " " + reg.org : reg.links + " " + reg.org + " " + reg.active}>Organization</NavLink>
             </div>
             {isVolRegistration ? 
             <Volunteer startOptionRegion={startOptionRegion}
                 selectedOptionRegion={selectedOptionRegion}
                 setSelectedOptionRegion={setSelectedOptionRegion}
-                startOptionBirthday={startOptionBirthday}
-                selectedOptionBirthday={selectedOptionBirthday}
-                setSelectedOptionBirthday={setSelectedOptionBirthday}    
             />  
             : <Organization />}
-            <EntraceEmailPassword listOfWathcingOfPass={listOfWathcingOfPass} isExist={isExist}/>
+            <EntraceEmailPassword listOfWathcingOfPass={listOfWathcingOfPass} isExistInReg={isExistInReg}/>
         </div>
     )
 }

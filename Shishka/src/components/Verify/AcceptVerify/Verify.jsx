@@ -21,7 +21,7 @@ const Verify = () => {
         dispatch(activate({uid, token}));
     }
 
-    if(activated) return <Navigate to="/" />
+    if(activated) return <Navigate to="/entrance" />
 
     if(isHandleClick) return <Navigate to="/entrance" />
 
@@ -29,11 +29,11 @@ const Verify = () => {
         <main className={v.main__wrapper}>
             <div className="container">
                 <div className={v.modal}>
-                    <h3>Сообщение отправлено</h3>
+                    <h3>The message has been sent</h3>
                     <p>
-                        Подтвердите, что это Ваша почта
+                    Confirm that this is your mail
                     </p>
-                    <button onClick={handleOnClick} className={v.modal__button}>Подтвердить</button>
+                    <button onClick={handleOnClick} className={v.modal__button}>Confirm</button>
                     {/* <button
                         className={v.modal__exit}
                         type="button"

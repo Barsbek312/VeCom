@@ -13,6 +13,13 @@
     align-items: flex-end;
 }
 
+.ava > label {
+    width: 14px;
+    height: 14px;
+    margin-left: -20px;
+    cursor: pointer;
+}
+
 .ava__wrapper{
     width: 130px;
     height: 130px;
@@ -21,21 +28,19 @@
     margin-left: -10px;
 }
 
-.btn{
-    background-color: transparent;
-    border: none;
-    outline: none;
-    margin-left: -20px;
-    cursor: pointer;
-}
-
-.btn > img{
+.ava > label > img{
     width: 100%;
     height: 100%;
 }
 
+.choose__avatar{
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+}
+
 .info{
-    margin-top: 10px;
+    margin-top: 15px;
     width: 100%;
     word-wrap: break-word;
 }

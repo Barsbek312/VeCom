@@ -1,4 +1,7 @@
 import axios from "axios";
+import { Cookies } from 'react-cookie';
+
+
 
 // let instance = axios.create({
 //     withCredentials: true,
@@ -15,63 +18,12 @@ let instance = axios.create({
     withCredentials: true,
     baseURL: "http://localhost:8000/",
     headers: {
-        'Access-Control-Allow-Origin' : '*',
-        'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
         'Content-Type': 'application/json',
     }
 })
 
-export const usersAPI = {
-    async getUsers() {
-        let res = await instance.get(`users/`);
-        return res;
-    },
-
-    async getUser(id) {
-        let res = await instance.get(`users/${id}`);
-        return res;
-    },
-
-    async updateUser(id, user) {
-        let res = await instance.put(`users/${id}`, user);
-        return res;
-    },
-
-    async deleteUser(id) {
-
-        let res = await instance.delete(`users/${id}`);
-        return res;
-    }
-
-}
-
-
-export const postsAPI = {
-    async getPosts() {
-        let res = await instance.get(`posts/`);
-        return res;
-    },
-
-    async getPost(id) {
-        let res = await instance.get(`posts/${id}`);
-        return res;
-    },
-
-    async createPost(post) {
-        let res = await instance.post(`posts/`, post);
-        return res;
-    },
-
-    async updatePost(id, post) {
-        let res = await instance.put(`posts/${id}`, post);
-        return res;
-    },
-
-    async deletePost(id) {
-        let res = await instance.delete(`posts/${id}`);
-        return res;
-    }
-}
 
 export const commentsAPI = {
     async getComments() {
@@ -211,21 +163,129 @@ export const imagesAPI = {
 
 }
 
+export const eventsAPI = {
+
+    async getEventsInHome({ pageSize, currentEvent }) {
+        let res = await instance.get("getEventsInHome");
+        return res;
+    },
+
+    async getEventsOfOrg({ id }) {
+        let res = await instance.get(`getEventsOfOrg/${id}`);
+        return res;
+    },
+
+
+}
+
 export const eventAPI = {
-    async getEvents({quantity, currentEvent}) {
-        let res = await instance.get();
+    async getClickedEvent({ id }) {
+        let res = await instance.get(`getClickedEvent/${id}`);
         return res;
     },
 
     async sendParticipation(data) {
-        let res = await instance.post();
+        let res = await instance.post(`sendTheParticipation`, data);
+        return res;
+    },
+
+    async sendEvent(data) {
+        let res = await instance.post("http://127.0.0.1:8000/events/", data);
+        return res;
+    },
+
+    async sendAccept(data) {
+        let res = await instance.post(`sendAccept`, data);
+        return res;
+    },
+
+    async sendAcceptAll(data) {
+        const res = await instance.post('sendAccepAll', data);
+        return res;
+    },
+
+    async sendComplete({ id }) {
+        const res = await instance.put(`sendComplete/${id}`);
+        return res;
+    },
+
+    async sendReject(data) {
+        let res = await instance.post("sendReject", data);
+        return res;
+    },
+
+    async sendView(data) {
+        let res = await instance.post(`sendView`, data);
+        return res;
+    },
+
+    async sendLike(data) {
+        let res = await instance.post("sendLike", data);
+        return res;
+    },
+
+    async sendDeleteLike({ like_id }) {
+        let res = await instance.delete(`sendDeleteLike/${like_id}`);
+        return res;
+    }
+
+}
+
+export const notificationsAPI = {
+    async getNotifications() {
+        let res = await instance.get("getNotifications");
+        return res;
+    },
+}
+
+export const notificationAPI = {
+    async getNotification({ id }) {
+        let res = await instance.get(`/${id}`);
         return res;
     }
 }
 
+export const profileAPI = {
+    async getProfileOfOrg({ id }) {
+        let res = await instance.get(`getProfileOrg/${id}`);
+        return res;
+    },
+
+    async getProfileOfVol({ id }) {
+        let res = await instance.get(`getProfileOfVol/${id}`);
+        return res;
+    },
+
+    async changeDescription({ id, data }) {
+        let res = instance.put(`/changeDescriptionOfVol/${id}`, { description: data });
+        return res;
+    },
+
+    async changeAva({ id, avatar }) {
+
+        const formData = new FormData();
+        formData.append('avatar', avatar);
+
+        const access = Cookies.get("access");
+
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data',
+                Authorization: `Bearer ${access}`
+            }
+        };
+
+        console.log(config)
+
+        let res = await instance.put(`/changeAvaOfVol/${id}`, formData, config);
+        return res;
+    }
+
+
+}
 
 export const authAPI = {
-    
+
     async register(userData) {
         let res = await instance.post(`^auth/users`, userData);
         return res;
@@ -235,7 +295,7 @@ export const authAPI = {
         let res = await instance.post(`api/users/login`, userData);
         return res;
     },
-    
+
     async me() {
         let res = await instance.get(`users/me`);
         return res;

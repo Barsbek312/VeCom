@@ -14,7 +14,7 @@ const Rating = () => {
         <main>
             <div className={"container"}>
                 <div className={r.header}>
-                    <h2>Рейтинг</h2>
+                    <h2>Rating</h2>
 
                 </div>
                 <div className={r.main}>

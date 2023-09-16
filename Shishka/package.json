@@ -3,14 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@react-pdf/renderer": "^3.1.12",
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
     "axios": "0.27.2",
     "cookie": "^0.5.0",
+    "eventsource": "^2.0.2",
+    "form-data": "^4.0.0",
+    "gsap": "^3.12.2",
+    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-burger-menu": "^3.0.9",
+    "react-content-loader": "^6.2.1",
+    "react-cookie": "^6.1.1",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.0",
     "react-redux": "^8.1.1",
@@ -25,7 +32,7 @@
     "react-scripts": "5.0.1"
   },
   "scripts": {
-    "start": "set PORT=8000 && react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
